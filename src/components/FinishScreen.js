@@ -14,7 +14,7 @@ function FinishScreen({ points, maxPoints, highScore, dispatch }) {
           dispatch({ type: "restart" });
         }}
       >
-        Restart
+        Restart Quiz
       </button>
     </>
   );

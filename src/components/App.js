@@ -10,6 +10,7 @@ import Progress from "./Progress";
 import FinishScreen from "./FinishScreen";
 import Footer from "./Footer";
 import Timer from "./Timer";
+const SEC_PER_QUES = 30;
 const initialstate = {
   questions: [],
   status: "loading",
@@ -17,7 +18,7 @@ const initialstate = {
   answer: null,
   points: 0,
   highScore: 0,
-  secondsRemaining: 200,
+  secondsRemaining: null,
 };
 function reducer(state, action) {
   switch (action.type) {
@@ -26,7 +27,11 @@ function reducer(state, action) {
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
-      return { ...state, status: "active" };
+      return {
+        ...state,
+        status: "active",
+        secondsRemaining: state.questions.length * SEC_PER_QUES,
+      };
     case "newAnswer":
       const question = state.questions.at(state.index);
       return {
